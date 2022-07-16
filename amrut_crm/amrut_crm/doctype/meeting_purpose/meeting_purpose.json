@@ -21,7 +21,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-07-15 17:16:53.544627",
+ "modified": "2022-07-16 13:41:49.254433",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Meeting Purpose",
@@ -73,6 +73,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC"
 }
