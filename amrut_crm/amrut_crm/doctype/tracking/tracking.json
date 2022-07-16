@@ -1,0 +1,174 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{sales_person}-{tracking_date}",
+ "creation": "2022-07-15 17:44:22.064544",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sales_person",
+  "user_full_name",
+  "employee",
+  "employee_name",
+  "cb_1",
+  "tracking_date",
+  "day_start",
+  "dat_end",
+  "work_duration",
+  "location_sb_section",
+  "day_start_location",
+  "distance_travelled_in_km",
+  "day_end_location",
+  "tracked_locations"
+ ],
+ "fields": [
+  {
+   "fieldname": "sales_person",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Sales Person (User)",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "tracking_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Tracking Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "day_start",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Day Start",
+   "reqd": 1
+  },
+  {
+   "fieldname": "dat_end",
+   "fieldtype": "Time",
+   "label": "Dat End"
+  },
+  {
+   "fieldname": "work_duration",
+   "fieldtype": "Duration",
+   "label": "Work Duration"
+  },
+  {
+   "fieldname": "location_sb_section",
+   "fieldtype": "Section Break",
+   "label": "Location SB"
+  },
+  {
+   "fieldname": "day_start_location",
+   "fieldtype": "Geolocation",
+   "label": "Day Start Location"
+  },
+  {
+   "fieldname": "distance_travelled_in_km",
+   "fieldtype": "Float",
+   "label": "Distance Travelled in KM",
+   "precision": "2"
+  },
+  {
+   "fieldname": "day_end_location",
+   "fieldtype": "Geolocation",
+   "label": "Day End Location"
+  },
+  {
+   "fieldname": "tracked_locations",
+   "fieldtype": "Code",
+   "label": "Tracked Locations"
+  },
+  {
+   "fetch_from": "sales_person.full_name",
+   "fieldname": "user_full_name",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "User Full Name"
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-07-16 09:24:44.517220",
+ "modified_by": "Administrator",
+ "module": "Amrut CRM",
+ "name": "Tracking",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Master Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}
