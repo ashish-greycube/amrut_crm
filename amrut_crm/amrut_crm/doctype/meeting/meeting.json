@@ -11,26 +11,32 @@
   "source",
   "doc_name",
   "person_name",
-  "sales_executive",
+  "mobile_no",
   "meeting_purpose",
+  "column_break_7",
+  "scheduled_datetime",
+  "sales_executive",
+  "territory",
+  "status",
+  "reschedule_reason",
+  "section_break_12",
   "to_discuss",
+  "column_break_15",
+  "meeting_conclusion",
+  "attach_file",
+  "field_section_detail",
   "meeting_start_date_time",
   "meeting_end_date_time",
   "meeting_duration",
   "cb_1",
-  "scheduled_datetime",
-  "status",
-  "mobile_no",
-  "territory",
-  "meeting_conclusion",
-  "reschedule_reason",
-  "attach_file",
   "meeting_geo_location"
  ],
  "fields": [
   {
+   "default": "ACSM.#",
    "fieldname": "naming_series",
    "fieldtype": "Select",
+   "hidden": 1,
    "in_list_view": 1,
    "label": "Series",
    "options": "ACSM.#",
@@ -158,11 +164,27 @@
    "fieldname": "meeting_geo_location",
    "fieldtype": "Geolocation",
    "label": "Meeting Geo Location"
+  },
+  {
+   "fieldname": "field_section_detail",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_12",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-07-15 17:36:08.396060",
+ "modified": "2022-07-18 09:39:56.971686",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Meeting",

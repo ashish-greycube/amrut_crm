@@ -9,10 +9,10 @@ frappe.ui.form.on('Field Map', {
 				{
 					"type": "Feature",
 					"properties": {
-						"name": "Daily Route",
-						"amenity": "Baseball Stadium",
-						"popupContent": "Daily Route!"
-					},
+						"stroke": "#555511",
+						"stroke-width": 20,
+						"stroke-opacity": 1
+					  },
 					"geometry": {
 						"type": "LineString",
 						"coordinates": [
