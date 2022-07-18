@@ -16,7 +16,7 @@ def create_meeting():
 	pass
 
 @frappe.whitelist()
-def create_meeting(source_name, target_doc=None,doctype):
+def create_meeting(source_name, target_doc=None,doctype=None):
 	print('-'*100)
 	print('doctype',doctype)
 	def update_accounts(source_doc, target_doc, source_parent):
