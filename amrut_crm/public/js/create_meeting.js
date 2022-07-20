@@ -3,9 +3,9 @@ frappe.ui.form.on(cur_frm.doc.doctype, {
         if (cur_frm.is_new()==undefined) {
             cur_frm.add_custom_button('Meeting CRM', () => {
                 frappe.model.open_mapped_doc({
-                    method: 'amrut_crm.amrut_crm.doctype.meeting.meeting.create_meeting',
+                    method: 'amrut_crm.amrut_crm.doctype.meeting.meeting.create_meeting_from_'+cur_frm.doc.doctype.toLowerCase(),
                     frm: cur_frm,
-                    doctype:cur_frm.doc.doctype,
+                    freeze_message: __("Creating Meeting ...")
                 });               
             }, 'Create');
             

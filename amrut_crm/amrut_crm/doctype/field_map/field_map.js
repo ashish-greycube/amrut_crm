@@ -76,3 +76,30 @@ frappe.ui.form.on('Field Map', {
 				console.log(JSON.parse(frm.doc.visit_map))
 	}
 });
+
+function onEachMarker(feature, layer) {
+	layer.on('click', function (e) {
+		//destroy any old popups that might be attached
+		if (layer._popup != undefined) {
+			layer.unbindPopup();
+		}
+			var marker_url = feature.properties.url;
+	
+			//display a placeholder popup
+			var pop = L.popup().setLatLng(this._latlng).setContent('Loading...').openOn(map);
+	
+			//request data and make a new popup when it's done
+			$.ajax({
+				url: marker_url,
+				success: function (data) {
+						//close placeholder popup
+						layer.closePopup();
+	
+						//attach the real popup and open it
+						layer.bindPopup(data);
+					}
+				});
+					layer.openPopup();
+				}
+			);
+		}

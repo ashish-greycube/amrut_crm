@@ -110,23 +110,11 @@ doctype_js = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"amrut_crm.tasks.all"
-# 	],
-# 	"daily": [
-# 		"amrut_crm.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"amrut_crm.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"amrut_crm.tasks.weekly"
-# 	]
-# 	"monthly": [
-# 		"amrut_crm.tasks.monthly"
-# 	]
-# }
+scheduler_events = {
+	"all": [
+		"amrut_crm.amrut_crm.doctype.tracking.tracking.auto_checkout_for_missing_data"
+	]
+}
 
 # Testing
 # -------

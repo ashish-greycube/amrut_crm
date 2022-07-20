@@ -16,15 +16,16 @@
   "day_start",
   "day_end",
   "work_duration",
-  "location_sb_section",
   "day_start_location",
-  "distance_travelled_in_km",
   "day_end_location",
+  "location_sb_section",
+  "user_route",
+  "distance_travelled_in_km",
   "tracked_locations"
  ],
  "fields": [
   {
-   "default": "__local",
+   "default": "__user",
    "fieldname": "sales_person",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -74,7 +75,7 @@
   },
   {
    "fieldname": "day_start_location",
-   "fieldtype": "Geolocation",
+   "fieldtype": "Data",
    "label": "Day Start Location"
   },
   {
@@ -85,7 +86,7 @@
   },
   {
    "fieldname": "day_end_location",
-   "fieldtype": "Geolocation",
+   "fieldtype": "Data",
    "label": "Day End Location"
   },
   {
@@ -112,11 +113,16 @@
    "fieldname": "day_end",
    "fieldtype": "Time",
    "label": "Day End"
+  },
+  {
+   "fieldname": "user_route",
+   "fieldtype": "Geolocation",
+   "label": "User route"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-07-18 11:51:49.493660",
+ "modified": "2022-07-18 13:17:30.015680",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Tracking",
