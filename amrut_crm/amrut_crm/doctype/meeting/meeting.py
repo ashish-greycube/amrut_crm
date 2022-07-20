@@ -109,7 +109,7 @@ def get_meeting_sales_executive_details(**args):
 			"""
 			select customer_name as person_name, sales_responsible_cf as sales_executive, territory as territory, mobile_no as mobile_no
 			from `tabCustomer`
-			where name=(doc_name)s
+			where name=%(doc_name)s
 			""",
 			args,
 			as_dict=True,
@@ -120,7 +120,7 @@ def get_meeting_sales_executive_details(**args):
 			"""
 			select lead_name as person_name, lead_owner as sales_executive, territory as territory, mobile_no as mobile_no
 			from `tabLead`
-			where name=(doc_name)s
+			where name=%(doc_name)s
 			""",
 			args,
 			as_dict=True,
@@ -131,7 +131,7 @@ def get_meeting_sales_executive_details(**args):
 			"""
 			select customer_name as person_name, converted_by as sales_executive, territory as territory, contact_mobile as mobile_no
 			from `tabOpportunity`
-			where name=(doc_name)s
+			where name=%(doc_name)s
 			""",
 			args,
 			as_dict=True,
