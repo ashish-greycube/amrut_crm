@@ -14,8 +14,8 @@ class Meeting(Document):
 
 		if self.source=='Customer':
 			self.person_name=frappe.db.get_value('Customer', self.doc_name, 'customer_name')
-			self.sales_executive=frappe.db.get_value('Customer', self.doc_name, 'sales_person')
-			# self.sales_executive=frappe.db.get_value('Customer', self.doc_name, 'sales_responsible_cf')
+			# self.sales_executive=frappe.db.get_value('Customer', self.doc_name, 'sales_person')
+			self.sales_executive=frappe.db.get_value('Customer', self.doc_name, 'sales_responsible_cf')
 			self.territory=frappe.db.get_value('Customer', self.doc_name, 'territory')
 			self.mobile_no=frappe.db.get_value('Customer', self.doc_name, 'mobile_no')
 		elif self.source=='Lead':
@@ -56,8 +56,8 @@ def create_meeting_from_customer(source_name, target_doc=None):
 	meeting.source='Customer'
 	meeting.doc_name=customer.name
 	meeting.person_name=customer.customer_name
-	# meeting.sales_executive=customer.sales_responsible_cf
-	meeting.sales_executive=customer.sales_person
+	meeting.sales_executive=customer.sales_responsible_cf
+	# meeting.sales_executive=customer.sales_person
 	meeting.territory=customer.territory
 	meeting.mobile_no=customer.mobile_no
 
