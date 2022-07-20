@@ -12,6 +12,7 @@ frappe.ui.form.on('Field Map', {
 						"name": "Route",
 						"popupContent": "My todays entire route!"
 					},
+					"id":1,
 					"geometry": {
 						"type": "LineString",
 						"coordinates": [
@@ -44,6 +45,7 @@ frappe.ui.form.on('Field Map', {
 						"name": "Meeting No 1",
 						"popupContent": "My first meeting today!"
 					},
+					"id":2,
 					"geometry": {
 						"type": "Point",
 						"coordinates": [
@@ -59,6 +61,7 @@ frappe.ui.form.on('Field Map', {
 						"amenity": "3Baseball Stadium",
 						"popupContent": "My second meeting today!"
 					},
+					"id":3,
 					"geometry": {
 						"type": "Point",
 						"coordinates": [
