@@ -33,13 +33,19 @@ class Meeting(Document):
 		if duplicate_meeting and self.name!=duplicate_meeting.name:
 			err_msg = _("Date and Time:{0}, executive {1} has meeting {2} ".
 			format(frappe.bold(self.scheduled_datetime),frappe.bold(self.sales_executive),get_link_to_form('Meeting',duplicate_meeting.name)))
+			frappe.throw(
+					title=_('Duplicate Meeting'),
+					msg=_(err_msg),
+					exc=frappe.DuplicateEntryError)				
 			frappe.throw(_(err_msg))	
 
 		if self.meeting_start_date_time and self.meeting_end_date_time:
 			if get_datetime(self.meeting_start_date_time) > get_datetime(self.meeting_end_date_time):
 				err_msg = _("From Time : {0} cannot be later than To Time : {1}"
 				.format(frappe.bold(self.meeting_start_date_time),frappe.bold(self.meeting_end_date_time)))
-				frappe.throw(_(err_msg))		
+				frappe.throw(
+					title=_('Incorrect From Time'),
+					msg=_(err_msg))		
 			timedelta = time_diff_in_seconds(self.meeting_end_date_time,self.meeting_start_date_time)
 			self.meeting_duration=timedelta
 		
