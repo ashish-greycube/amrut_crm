@@ -6,6 +6,7 @@ from frappe.model.document import Document
 import datetime
 from frappe import _
 from frappe.utils import time_diff_in_seconds,get_link_to_form,get_time
+from frappe.utils import  nowdate
 
 class Tracking(Document):
 	def validate(self):
@@ -43,7 +44,7 @@ def auto_checkout_for_missing_data():
 	data = frappe.db.sql(
 		"""
 		UPDATE `tabTracking` 
-		set day_end="23:59:00",day_end_location =day_start_location , distance_travelled_in_km =0,work_duration=0
-		where tracking_date=CURDATE() and day_end is NULL  
-	""")	
-
+		set day_end="23:59:00",day_end_location=day_start_location , distance_travelled_in_km =0,work_duration=0
+		where tracking_date= %(today)s and day_end is NULL  
+				""",
+			{"today": nowdate()},as_dict=True)
