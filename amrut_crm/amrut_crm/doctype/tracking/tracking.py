@@ -36,16 +36,16 @@ class Tracking(Document):
 			# self.work_duration=timedelta
 
 			# create employee checkout
-			checkout_exist=frappe.db.exists('Employee Checkin', {"employee": employee.name,"log_type":"OUT","time":get_datetime(self.tracking_date+' '+self.day_end)})
-			print('checkout_exist',checkout_exist)
-			if checkout_exist==None:
-				doc = frappe.new_doc('Employee Checkin')
-				doc.employee=employee.name
-				doc.employee_name=employee.employee_name
-				doc.log_type='OUT'
-				doc.time=get_datetime(self.tracking_date+' '+self.day_end)
-				doc.save(ignore_permissions=True)
-				print(doc.name)			
+			# checkout_exist=frappe.db.exists('Employee Checkin', {"employee": employee.name,"log_type":"OUT","time":get_datetime(self.tracking_date+' '+self.day_end)})
+			# print('checkout_exist',checkout_exist)
+			# if checkout_exist==None:
+			# 	doc = frappe.new_doc('Employee Checkin')
+			# 	doc.employee=employee.name
+			# 	doc.employee_name=employee.employee_name
+			# 	doc.log_type='OUT'
+			# 	doc.time=get_datetime(self.tracking_date+' '+self.day_end)
+			# 	doc.save(ignore_permissions=True)
+			# 	print(doc.name)			
 
 @frappe.whitelist()
 def get_logged_in_user_detail(**args):

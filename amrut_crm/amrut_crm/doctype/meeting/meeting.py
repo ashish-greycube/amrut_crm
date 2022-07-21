@@ -39,7 +39,8 @@ class Meeting(Document):
 					exc=frappe.DuplicateEntryError)				
 
 		if self.meeting_start_date_time:
-			tracking_exist=frappe.db.exists('Tracking', {"sales_person": self.meeting_executive_owner,"log_type":"IN","tracking_date":getdate(self.meeting_start_date_time)})
+			tracking_exist=frappe.db.exists('Tracking', {"sales_person": self.meeting_executive_owner,"tracking_date":getdate(self.meeting_start_date_time)})
+			print('tracking_exist'*10,tracking_exist)
 			if tracking_exist==None:
 				err_msg = _("Tracking record doesnot exist for {0}, on date {1}".format(frappe.bold(self.meeting_executive_owner),frappe.bold(getdate(self.meeting_start_date_time))))
 				frappe.throw(
