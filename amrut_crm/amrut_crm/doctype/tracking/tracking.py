@@ -32,8 +32,8 @@ class Tracking(Document):
 				err_msg = _("From Time : {0} cannot be later than To Time : {1}"
 				.format(frappe.bold(self.day_start),frappe.bold(self.day_end)))
 				frappe.throw(_(err_msg))		
-			timedelta = time_diff_in_seconds(self.day_end,self.day_start)
-			self.work_duration=timedelta
+			# timedelta = time_diff_in_seconds(self.day_end,self.day_start)
+			# self.work_duration=timedelta
 
 			# create employee checkout
 			checkout_exist=frappe.db.exists('Employee Checkin', {"employee": employee.name,"log_type":"OUT","time":get_datetime(self.tracking_date+' '+self.day_end)})
