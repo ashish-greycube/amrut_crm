@@ -3,16 +3,12 @@
 
 frappe.ui.form.on('Field Map', {
 	refresh:function(frm){
-		let route={
+		//  set a single point to amrut science city office
+		let dummy_route={
 			"type": "FeatureCollection",
 			"features": [
 				{
 					"type": "Feature",
-					"properties": {
-						"name": "Route",
-						"popupContent": "My todays entire route!"
-					},
-					"id":1,
 					"geometry": {
 						"type": "LineString",
 						"coordinates": [
@@ -20,183 +16,23 @@ frappe.ui.form.on('Field Map', {
 								72.5107881,
 								23.073895
 							],
-							[
-								72.4943729,
-								23.073894
-							],
-							[
-								72.5205067,
-								23.0704263
-							],							
-							[
-								72.4725258,
-								23.0287185
-							],
-							[
-								72.5068045,
-								23.0342822
-							]
 						]
 					}
 				},
-				{
-					"type": "Feature",
-					"properties": {
-						"name": "Meeting No 1",
-						"popupContent": "My first meeting today!"
-					},
-					"id":2,
-					"geometry": {
-						"type": "Point",
-						"coordinates": [
-							72.5068045,
-							23.0342822
-						]
-					}
-				},
-				{
-					"type": "Feature",
-					"properties": {
-						"name": "Meeting No 2",
-						"amenity": "3Baseball Stadium",
-						"popupContent": "My second meeting today!"
-					},
-					"id":3,
-					"geometry": {
-						"type": "Point",
-						"coordinates": [
-							72.4763257,
-							23.0285262							
-						]
-					}
-				}
+
 			]
 		}
-		var myStyle = {
-			"color": "#ff7800",
-			"weight": 50,
-			"opacity": 2.65
-		};
-		let map=cur_frm.fields_dict['visit_map'].map
-		function add_meetings(meetings, field_name, style) {
-			let _map = cur_frm.fields_dict[field_name].map;
-			meetings.forEach(m => {
-				L.geoJSON({
-					"type": "FeatureCollection",
-					"features": [m]
-				}, {
-					// style: style,
-					onEachFeature: function onEachFeature(feature, layer) {
-						//destroy any old popups that might be attached
-						if (layer._popup != undefined) {
-							layer.unbindPopup();
-						}
-						var popupContent = '<p>Name: ' + feature.properties.name + '</p>';
-						if (feature.properties && feature.properties.popupContent) {
-							popupContent += feature.properties.popupContent;
-							layer.bindPopup(popupContent);
-						}
-					}
-				}).addTo(_map);
-			});
-		}
-
-
-		// function onEachFeature(feature, layer) {
-		// 		//destroy any old popups that might be attached
-		// 		if (layer._popup != undefined) {
-		// 			layer.unbindPopup();
-		// 		}			
-		// 	var popupContent = '<p>Name: ' +feature.properties.name  +'</p>';
-	
-		// 	if (feature.properties && feature.properties.popupContent) {
-		// 		popupContent += feature.properties.popupContent;
-		// 	}
-	
-		// 	layer.bindPopup(popupContent);
-		// }
-		// function onEachMarker(feature, layer) {
-
-		// 	layer.on('click', function (e) {
-		// 		//destroy any old popups that might be attached
-		// 		if (layer._popup != undefined) {
-		// 			layer.unbindPopup();
-		// 		}
-		// 			var marker_url = feature.properties.popupContent;
-			
-		// 			//display a placeholder popup
-		// 			var pop = L.popup().setLatLng(this._latlng).setContent('Loading...').openOn(map);
-			
-		// 			//request data and make a new popup when it's done
-		// 			$.ajax({
-		// 				url: marker_url,
-		// 				success: function (data) {
-		// 						//close placeholder popup
-		// 						layer.closePopup();
-			
-		// 						//attach the real popup and open it
-		// 						layer.bindPopup(data);
-		// 					}});
-		// 					layer.openPopup();
-		// 				}
-		// 			);
-		// 		}
-		// let route=`{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"LineString","coordinates":[[72.843191,19.079072],[72.860357,19.089941],[72.871,19.08037]]}}]}`
+		frm.set_value('visit_map',JSON.stringify(dummy_route))
 		
-		// L.geoJSON(route, {
-		// 	style: myStyle,
-		// 	onEachFeature: onEachFeature
-		// }).addTo(map);
-		let meetings = [{
-			"type": "Feature",
-			"properties": {
-				"name": "Meeting No 1 New",
-				"popupContent": "My first meeting today!"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [
-					72.50,
-					23.03
-				]
-			}
-		},
-		{
-			"type": "Feature",
-			"properties": {
-				"name": "Meeting No 2 New",
-				"amenity": "3Baseball Stadium",
-				"popupContent": "My second meeting today!"
-			},
-			"geometry": {
-				"type": "LineString",
-				"coordinates": [
-					[
-						72.5107881,
-						23.073895
-					],
-					[
-						72.4943729,
-						23.073894
-					],
-					[
-						72.5205067,
-						23.0704263
-					],							
-					[
-						72.4725258,
-						23.0287185
-					],
-					[
-						72.5068045,
-						23.0342822
-					]
-				]
-			}
-		}];		
-		let met1=[
+		//  construct entire route with meetings
+		let meeting_route=[
 			{
 				"type": "Feature",
+				"style" : {
+					"color": "#ff7800",
+					"weight": 50,
+					"opacity": 2.65
+				},
 				"properties": {
 					"name": "Route",
 					"popupContent": "My todays entire route!"
@@ -231,7 +67,7 @@ frappe.ui.form.on('Field Map', {
 				"type": "Feature",
 				"properties": {
 					"name": "Meeting No 1",
-					"popupContent": "My first meeting today!"
+					"popupContent": "Near D-Mart!"
 				},
 				"geometry": {
 					"type": "Point",
@@ -245,8 +81,7 @@ frappe.ui.form.on('Field Map', {
 				"type": "Feature",
 				"properties": {
 					"name": "Meeting No 2",
-					"amenity": "3Baseball Stadium",
-					"popupContent": "My second meeting today!"
+					"popupContent": "Near Rajpath Club!"
 				},
 				"geometry": {
 					"type": "Point",
@@ -256,45 +91,46 @@ frappe.ui.form.on('Field Map', {
 					]
 				}
 			}
-		]
-		
-		
-		frm.set_value('visit_map',JSON.stringify(meetings))
-		add_meetings(meetings, 'visit_map')
-		// L.geoJSON(geojsonFeature, {
+		]		
+	
+		// var myStyle = {
+		// 	"color": "#ff7800",
+		// 	"weight": 50,
+		// 	"opacity": 2.65
+		// };
+		// L.geoJSON(route, {
+		// 	style: myStyle,
 		// 	onEachFeature: onEachFeature
 		// }).addTo(map);
-		
+
+		function add_meetings(meetings, field_name, style) {
+			let _map = cur_frm.fields_dict[field_name].map;
+			meetings.forEach(m => {
+				L.geoJSON({
+					"type": "FeatureCollection",
+					"features": [m]
+				}, {
+					style: function (feature) {
+						return feature.properties.style;
+					},					
+					onEachFeature: function onEachFeature(feature, layer) {
+						//destroy any old popups that might be attached
+						if (layer._popup != undefined) {
+							layer.unbindPopup();
+						}
+						var popupContent = '<p>Name: ' + feature.properties.name + '</p>';
+						if (feature.properties && feature.properties.popupContent) {
+							popupContent += feature.properties.popupContent;
+							layer.bindPopup(popupContent);
+						}
+					}
+				}).addTo(_map);
+			});
+		}
+	
+		add_meetings(meeting_route, 'visit_map')
 	},
 	visit_map: function(frm) {
-		console.log(frm.doc.visit_map,typeof frm.doc.visit_map)
-				console.log(JSON.parse(frm.doc.visit_map))
 	}
 });
 
-function onEachMarker(feature, layer) {
-	layer.on('click', function (e) {
-		//destroy any old popups that might be attached
-		if (layer._popup != undefined) {
-			layer.unbindPopup();
-		}
-			var marker_url = feature.properties.url;
-	
-			//display a placeholder popup
-			var pop = L.popup().setLatLng(this._latlng).setContent('Loading...').openOn(map);
-	
-			//request data and make a new popup when it's done
-			$.ajax({
-				url: marker_url,
-				success: function (data) {
-						//close placeholder popup
-						layer.closePopup();
-	
-						//attach the real popup and open it
-						layer.bindPopup(data);
-					}
-				});
-					layer.openPopup();
-				}
-			);
-		}
