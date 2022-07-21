@@ -41,7 +41,7 @@ class Meeting(Document):
 		if self.meeting_start_date_time:
 			tracking_exist=frappe.db.exists('Tracking', {"sales_person": self.meeting_executive_owner,"log_type":"IN","tracking_date":getdate(self.meeting_start_date_time)})
 			if tracking_exist==None:
-				err_msg = _("Tracking record doesnot exist for {0}, on date {1}".format(frappe.bold(self.sales_executive),frappe.bold(getdate(self.meeting_start_date_time))))
+				err_msg = _("Tracking record doesnot exist for {0}, on date {1}".format(frappe.bold(self.meeting_executive_owner),frappe.bold(getdate(self.meeting_start_date_time))))
 				frappe.throw(
 						title=_('Missing Tracking Record'),
 						msg=_(err_msg),
