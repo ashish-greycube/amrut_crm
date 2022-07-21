@@ -78,22 +78,43 @@ frappe.ui.form.on('Field Map', {
 			"opacity": 2.65
 		};
 		let map=cur_frm.fields_dict['visit_map'].map
-
-
-
-		function onEachFeature(feature, layer) {
-				//destroy any old popups that might be attached
-				if (layer._popup != undefined) {
-					layer.unbindPopup();
-				}			
-			var popupContent = '<p>Name: ' +feature.properties.name  +'</p>';
-	
-			if (feature.properties && feature.properties.popupContent) {
-				popupContent += feature.properties.popupContent;
-			}
-	
-			layer.bindPopup(popupContent);
+		function add_meetings(meetings, field_name, style) {
+			let _map = cur_frm.fields_dict[field_name].map;
+			meetings.forEach(m => {
+				L.geoJSON({
+					"type": "FeatureCollection",
+					"features": [m]
+				}, {
+					// style: style,
+					onEachFeature: function onEachFeature(feature, layer) {
+						//destroy any old popups that might be attached
+						if (layer._popup != undefined) {
+							layer.unbindPopup();
+						}
+						var popupContent = '<p>Name: ' + feature.properties.name + '</p>';
+						if (feature.properties && feature.properties.popupContent) {
+							popupContent += feature.properties.popupContent;
+							layer.bindPopup(popupContent);
+						}
+					}
+				}).addTo(_map);
+			});
 		}
+
+
+		// function onEachFeature(feature, layer) {
+		// 		//destroy any old popups that might be attached
+		// 		if (layer._popup != undefined) {
+		// 			layer.unbindPopup();
+		// 		}			
+		// 	var popupContent = '<p>Name: ' +feature.properties.name  +'</p>';
+	
+		// 	if (feature.properties && feature.properties.popupContent) {
+		// 		popupContent += feature.properties.popupContent;
+		// 	}
+	
+		// 	layer.bindPopup(popupContent);
+		// }
 		// function onEachMarker(feature, layer) {
 
 		// 	layer.on('click', function (e) {
@@ -121,12 +142,125 @@ frappe.ui.form.on('Field Map', {
 		// 			);
 		// 		}
 		// let route=`{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"LineString","coordinates":[[72.843191,19.079072],[72.860357,19.089941],[72.871,19.08037]]}}]}`
-		frm.set_value('visit_map',JSON.stringify(route))
-		L.geoJSON(route, {
-			style: myStyle,
-			onEachFeature: onEachFeature
-		}).addTo(map);
-
+		
+		// L.geoJSON(route, {
+		// 	style: myStyle,
+		// 	onEachFeature: onEachFeature
+		// }).addTo(map);
+		let meetings = [{
+			"type": "Feature",
+			"properties": {
+				"name": "Meeting No 1 New",
+				"popupContent": "My first meeting today!"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					72.50,
+					23.03
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"name": "Meeting No 2 New",
+				"amenity": "3Baseball Stadium",
+				"popupContent": "My second meeting today!"
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[
+						72.5107881,
+						23.073895
+					],
+					[
+						72.4943729,
+						23.073894
+					],
+					[
+						72.5205067,
+						23.0704263
+					],							
+					[
+						72.4725258,
+						23.0287185
+					],
+					[
+						72.5068045,
+						23.0342822
+					]
+				]
+			}
+		}];		
+		let met1=[
+			{
+				"type": "Feature",
+				"properties": {
+					"name": "Route",
+					"popupContent": "My todays entire route!"
+				},
+				"geometry": {
+					"type": "LineString",
+					"coordinates": [
+						[
+							72.5107881,
+							23.073895
+						],
+						[
+							72.4943729,
+							23.073894
+						],
+						[
+							72.5205067,
+							23.0704263
+						],							
+						[
+							72.4725258,
+							23.0287185
+						],
+						[
+							72.5068045,
+							23.0342822
+						]
+					]
+				}
+			},
+			{
+				"type": "Feature",
+				"properties": {
+					"name": "Meeting No 1",
+					"popupContent": "My first meeting today!"
+				},
+				"geometry": {
+					"type": "Point",
+					"coordinates": [
+						72.50,
+						23.03
+					]
+				}
+			},
+			{
+				"type": "Feature",
+				"properties": {
+					"name": "Meeting No 2",
+					"amenity": "3Baseball Stadium",
+					"popupContent": "My second meeting today!"
+				},
+				"geometry": {
+					"type": "Point",
+					"coordinates": [
+						72.4763257,
+						23.0285262							
+					]
+				}
+			}
+		]
+		
+		
+		frm.set_value('visit_map',JSON.stringify(meetings))
+		add_meetings(meetings, 'visit_map')
 		// L.geoJSON(geojsonFeature, {
 		// 	onEachFeature: onEachFeature
 		// }).addTo(map);

@@ -5,10 +5,22 @@ import frappe
 from frappe.model.document import Document
 import datetime
 from frappe import _
-from frappe.utils import time_diff_in_seconds,get_link_to_form,get_time
+from frappe.utils import time_diff_in_seconds,get_link_to_form,get_time,get_datetime
 from frappe.utils import  nowdate
 
 class Tracking(Document):
+	def after_insert(self):
+		# create employee checkin
+		employee = frappe.db.get_value(	"Employee", {"user_id": self.sales_person}, ["name","employee_name"], as_dict=True)
+		if employee:
+			doc = frappe.new_doc('Employee Checkin')
+			doc.employee=employee.name
+			doc.employee_name=employee.employee_name
+			doc.log_type='IN'
+			doc.time=get_datetime(self.tracking_date+' '+self.day_start)
+			doc.save(ignore_permissions=True)
+			print(doc.name)
+
 	def validate(self):
 		employee = frappe.db.get_value(	"Employee", {"user_id": self.sales_person}, ["name","employee_name"], as_dict=True)
 		if employee:
@@ -22,6 +34,18 @@ class Tracking(Document):
 				frappe.throw(_(err_msg))		
 			timedelta = time_diff_in_seconds(self.day_end,self.day_start)
 			self.work_duration=timedelta
+
+			# create employee checkout
+			checkout_exist=frappe.db.exists('Employee Checkin', {"employee": employee.name,"log_type":"OUT","time":get_datetime(self.tracking_date+' '+self.day_end)})
+			print('checkout_exist',checkout_exist)
+			if checkout_exist==None:
+				doc = frappe.new_doc('Employee Checkin')
+				doc.employee=employee.name
+				doc.employee_name=employee.employee_name
+				doc.log_type='OUT'
+				doc.time=get_datetime(self.tracking_date+' '+self.day_end)
+				doc.save(ignore_permissions=True)
+				print(doc.name)			
 
 @frappe.whitelist()
 def get_logged_in_user_detail(**args):

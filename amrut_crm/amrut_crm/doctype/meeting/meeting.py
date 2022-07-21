@@ -7,7 +7,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
 import datetime
-from frappe.utils import time_diff_in_seconds,get_link_to_form,get_datetime
+from frappe.utils import time_diff_in_seconds,get_link_to_form,get_datetime,getdate
 
 class Meeting(Document):
 	def validate(self):
@@ -37,7 +37,15 @@ class Meeting(Document):
 					title=_('Duplicate Meeting'),
 					msg=_(err_msg),
 					exc=frappe.DuplicateEntryError)				
-			frappe.throw(_(err_msg))	
+
+		if self.meeting_start_date_time:
+			tracking_exist=frappe.db.exists('Tracking', {"sales_person": self.sales_executive,"log_type":"IN","tracking_date":getdate(self.meeting_start_date_time)})
+			if tracking_exist==None:
+				err_msg = _("Tracking record doesnot exist for {0}, on date {1}".format(frappe.bold(self.sales_executive),frappe.bold(getdate(self.meeting_start_date_time))))
+				frappe.throw(
+						title=_('Missing Tracking Record'),
+						msg=_(err_msg),
+						exc=frappe.DoesNotExistError)				
 
 		if self.meeting_start_date_time and self.meeting_end_date_time:
 			if get_datetime(self.meeting_start_date_time) > get_datetime(self.meeting_end_date_time):
@@ -138,3 +146,9 @@ def get_meeting_sales_executive_details(**args):
 		)
 		return data	
 
+@frappe.whitelist()
+def get_meeting_list(**args):
+	pass
+	# if not (args.get("scheduled_date"):
+	# 	return 0	
+	# args["scheduled_date"] = args.get("scheduled_date")

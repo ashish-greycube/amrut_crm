@@ -36,7 +36,6 @@
    "default": "ACSM.#",
    "fieldname": "naming_series",
    "fieldtype": "Select",
-   "in_list_view": 1,
    "label": "Series",
    "options": "\nACSM.#",
    "reqd": 1
@@ -184,7 +183,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-07-20 11:53:07.720079",
+ "modified": "2022-07-20 19:01:07.227749",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Meeting",
