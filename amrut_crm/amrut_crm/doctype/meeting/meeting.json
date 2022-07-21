@@ -15,6 +15,7 @@
   "sales_executive",
   "territory",
   "column_break_7",
+  "meeting_executive_owner",
   "scheduled_datetime",
   "meeting_purpose",
   "status",
@@ -179,11 +180,21 @@
    "fieldname": "meeting_location",
    "fieldtype": "Data",
    "label": "Meeting Location"
+  },
+  {
+   "default": "__user",
+   "fieldname": "meeting_executive_owner",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Meeting Executive Owner",
+   "options": "User",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-07-20 19:01:07.227749",
+ "modified": "2022-07-21 12:47:42.611342",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Meeting",
