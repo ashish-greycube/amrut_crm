@@ -5,7 +5,7 @@ import frappe
 from frappe.model.document import Document
 import datetime
 from frappe import _
-from frappe.utils import time_diff_in_seconds,get_link_to_form,get_time,get_datetime
+from frappe.utils import time_diff_in_seconds,get_link_to_form,get_time,get_datetime,get_timedelta
 from frappe.utils import  nowdate
 
 class Tracking(Document):
@@ -28,24 +28,26 @@ class Tracking(Document):
 			self.employee_name=employee.employee_name
 
 		if self.day_start and self.day_end:
+			if isinstance(self.day_end, str):
+				self.day_end = get_timedelta(self.day_end)			
 			if get_time(self.day_start) > get_time(self.day_end):
 				err_msg = _("From Time : {0} cannot be later than To Time : {1}"
 				.format(frappe.bold(self.day_start),frappe.bold(self.day_end)))
 				frappe.throw(_(err_msg))		
-			# timedelta = time_diff_in_seconds(self.day_end,self.day_start)
-			# self.work_duration=timedelta
+			timedelta = time_diff_in_seconds(self.day_end,self.day_start)
+			self.work_duration=timedelta
 
 			# create employee checkout
-			# checkout_exist=frappe.db.exists('Employee Checkin', {"employee": employee.name,"log_type":"OUT","time":get_datetime(self.tracking_date+' '+self.day_end)})
-			# print('checkout_exist',checkout_exist)
-			# if checkout_exist==None:
-			# 	doc = frappe.new_doc('Employee Checkin')
-			# 	doc.employee=employee.name
-			# 	doc.employee_name=employee.employee_name
-			# 	doc.log_type='OUT'
-			# 	doc.time=get_datetime(self.tracking_date+' '+self.day_end)
-			# 	doc.save(ignore_permissions=True)
-			# 	print(doc.name)			
+			checkout_exist=frappe.db.exists('Employee Checkin', {"employee": employee.name,"log_type":"OUT","time":get_datetime(self.tracking_date+' '+self.day_end)})
+			print('checkout_exist',checkout_exist)
+			if checkout_exist==None:
+				doc = frappe.new_doc('Employee Checkin')
+				doc.employee=employee.name
+				doc.employee_name=employee.employee_name
+				doc.log_type='OUT'
+				doc.time=get_datetime(self.tracking_date+' '+self.day_end)
+				doc.save(ignore_permissions=True)
+				print(doc.name)			
 
 @frappe.whitelist()
 def get_logged_in_user_detail(**args):

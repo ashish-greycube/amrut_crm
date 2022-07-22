@@ -111,7 +111,7 @@ frappe.ui.form.on('Field Map', {
 					"features": [m]
 				}, {
 					style: function (feature) {
-						return feature.properties.style;
+						return feature.style || {};
 					},					
 					onEachFeature: function onEachFeature(feature, layer) {
 						//destroy any old popups that might be attached
