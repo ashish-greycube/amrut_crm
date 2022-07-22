@@ -29,7 +29,9 @@ class Tracking(Document):
 
 		if self.day_start and self.day_end:
 			if isinstance(self.day_end, str):
-				self.day_end = get_timedelta(self.day_end)			
+				self.day_end = get_timedelta(self.day_end)
+			if isinstance(self.day_start, str):
+				self.day_start = get_timedelta(self.day_start)						
 			if get_time(self.day_start) > get_time(self.day_end):
 				err_msg = _("From Time : {0} cannot be later than To Time : {1}"
 				.format(frappe.bold(self.day_start),frappe.bold(self.day_end)))
