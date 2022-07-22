@@ -36,9 +36,9 @@ class Tracking(Document):
 				frappe.throw(_(err_msg))		
 			timedelta = time_diff_in_seconds(self.day_end,self.day_start)
 			self.work_duration=timedelta
-
+			out_time = self.tracking_date + self.day_end
 			# create employee checkout
-			checkout_exist=frappe.db.exists('Employee Checkin', {"employee": employee.name,"log_type":"OUT","time":get_datetime(self.tracking_date+' '+self.day_end)})
+			checkout_exist=frappe.db.exists('Employee Checkin', {"employee": employee.name,"log_type":"OUT","time":out_time})
 			print('checkout_exist',checkout_exist)
 			if checkout_exist==None:
 				doc = frappe.new_doc('Employee Checkin')
