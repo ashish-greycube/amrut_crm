@@ -29,16 +29,20 @@ class Meeting(Document):
 			self.territory=frappe.db.get_value('Opportunity', self.doc_name, 'territory')
 			self.mobile_no=frappe.db.get_value('Opportunity', self.doc_name, 'contact_mobile')
 
-		duplicate_meeting = frappe.db.get_value("Meeting", {"scheduled_datetime": self.scheduled_datetime,"sales_executive":self.sales_executive}, ["name"], as_dict=True)
+		if isinstance(self.scheduled_datetime, str):
+			self.scheduled_datetime = get_datetime(self.scheduled_datetime)
+		duplicate_meeting = frappe.db.get_value("Meeting", {"scheduled_datetime": self.scheduled_datetime,"meeting_executive_owner":self.meeting_executive_owner}, ["name"], as_dict=True)
 		if duplicate_meeting and self.name!=duplicate_meeting.name:
-			err_msg = _("Date and Time:{0}, executive {1} has meeting {2} ".
-			format(frappe.bold(self.scheduled_datetime),frappe.bold(self.sales_executive),get_link_to_form('Meeting',duplicate_meeting.name)))
+			err_msg = _("Date and Time:{0}, meeting executive {1} has meeting {2} ".
+			format(frappe.bold(self.scheduled_datetime),frappe.bold(self.meeting_executive_owner),get_link_to_form('Meeting',duplicate_meeting.name)))
 			frappe.throw(
 					title=_('Duplicate Meeting'),
 					msg=_(err_msg),
 					exc=frappe.DuplicateEntryError)				
 
 		if self.meeting_start_date_time:
+			if isinstance(self.meeting_start_date_time, str):
+				self.meeting_start_date_time = get_datetime(self.meeting_start_date_time)			
 			tracking_exist=frappe.db.exists('Tracking', {"sales_person": self.meeting_executive_owner,"tracking_date":getdate(self.meeting_start_date_time)})
 			print('tracking_exist'*10,tracking_exist)
 			if tracking_exist==None:
@@ -49,6 +53,11 @@ class Meeting(Document):
 						exc=frappe.DoesNotExistError)				
 
 		if self.meeting_start_date_time and self.meeting_end_date_time:
+			if isinstance(self.meeting_start_date_time, str):
+				self.meeting_start_date_time = get_datetime(self.meeting_start_date_time)
+			if isinstance(self.meeting_end_date_time, str):
+				self.meeting_end_date_time = get_datetime(self.meeting_end_date_time)
+
 			if get_datetime(self.meeting_start_date_time) > get_datetime(self.meeting_end_date_time):
 				err_msg = _("From Time : {0} cannot be later than To Time : {1}"
 				.format(frappe.bold(self.meeting_start_date_time),frappe.bold(self.meeting_end_date_time)))

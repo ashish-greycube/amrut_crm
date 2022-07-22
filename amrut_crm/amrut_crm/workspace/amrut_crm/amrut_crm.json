@@ -88,6 +88,16 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Employee Checkin",
+   "link_to": "Employee Checkin",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Setup",
    "link_type": "DocType",
    "onboard": 0,
@@ -103,7 +113,7 @@
    "type": "Link"
   }
  ],
- "modified": "2022-07-18 15:32:02.108308",
+ "modified": "2022-07-22 09:59:51.085309",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Amrut CRM",
