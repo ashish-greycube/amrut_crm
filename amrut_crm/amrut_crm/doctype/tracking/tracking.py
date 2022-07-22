@@ -45,7 +45,7 @@ class Tracking(Document):
 				doc.employee=employee.name
 				doc.employee_name=employee.employee_name
 				doc.log_type='OUT'
-				doc.time=get_datetime(self.tracking_date+' '+self.day_end)
+				doc.time=out_time
 				doc.save(ignore_permissions=True)
 				print(doc.name)			
 
