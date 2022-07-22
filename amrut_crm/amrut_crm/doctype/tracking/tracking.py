@@ -5,7 +5,7 @@ import frappe
 from frappe.model.document import Document
 import datetime
 from frappe import _
-from frappe.utils import time_diff_in_seconds,get_link_to_form,get_time,get_datetime,get_timedelta
+from frappe.utils import time_diff_in_seconds,get_link_to_form,get_time,get_datetime,get_timedelta,getdate
 from frappe.utils import  nowdate
 
 class Tracking(Document):
@@ -36,7 +36,7 @@ class Tracking(Document):
 				frappe.throw(_(err_msg))		
 			timedelta = time_diff_in_seconds(self.day_end,self.day_start)
 			self.work_duration=timedelta
-			out_time = self.tracking_date + self.day_end
+			out_time = get_datetime(self.tracking_date) + self.day_end
 			# create employee checkout
 			checkout_exist=frappe.db.exists('Employee Checkin', {"employee": employee.name,"log_type":"OUT","time":out_time})
 			print('checkout_exist',checkout_exist)
