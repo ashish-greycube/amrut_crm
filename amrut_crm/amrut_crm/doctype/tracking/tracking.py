@@ -11,13 +11,14 @@ from frappe.utils import  nowdate
 class Tracking(Document):
 	def after_insert(self):
 		# create employee checkin
+		in_time = get_datetime(self.tracking_date) + self.day_start
 		employee = frappe.db.get_value(	"Employee", {"user_id": self.sales_person}, ["name","employee_name"], as_dict=True)
 		if employee:
 			doc = frappe.new_doc('Employee Checkin')
 			doc.employee=employee.name
 			doc.employee_name=employee.employee_name
 			doc.log_type='IN'
-			doc.time=get_datetime(self.tracking_date+' '+self.day_start)
+			doc.time=in_time
 			doc.save(ignore_permissions=True)
 			print(doc.name)
 
