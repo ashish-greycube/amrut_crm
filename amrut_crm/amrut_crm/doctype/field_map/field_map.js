@@ -9,6 +9,11 @@ frappe.ui.form.on('Field Map', {
 			"features": [
 				{
 					"type": "Feature",
+					"style" : {
+						"color": "#ffffff",
+						"weight": 0,
+						"opacity": 0
+					},					
 					"geometry": {
 						"type": "LineString",
 						"coordinates": [
@@ -16,6 +21,10 @@ frappe.ui.form.on('Field Map', {
 								72.5107881,
 								23.073895
 							],
+							[
+								72.5068045,
+								23.0342822
+							]							
 						]
 					}
 				},
@@ -30,7 +39,7 @@ frappe.ui.form.on('Field Map', {
 				"type": "Feature",
 				"style" : {
 					"color": "#ff7800",
-					"weight": 50,
+					"weight": 10,
 					"opacity": 2.65
 				},
 				"properties": {

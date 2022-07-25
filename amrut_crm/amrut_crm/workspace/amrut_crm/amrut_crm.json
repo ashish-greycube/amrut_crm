@@ -111,9 +111,18 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": " CRM Settings",
+   "link_to": "Amrut CRM Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2022-07-22 09:59:51.085309",
+ "modified": "2022-07-25 14:43:11.909268",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Amrut CRM",
