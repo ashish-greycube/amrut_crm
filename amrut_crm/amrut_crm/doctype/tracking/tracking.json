@@ -19,7 +19,6 @@
   "day_start_location",
   "day_end_location",
   "location_sb_section",
-  "user_route",
   "distance_travelled_in_km",
   "tracked_locations"
  ],
@@ -70,8 +69,7 @@
   },
   {
    "fieldname": "location_sb_section",
-   "fieldtype": "Section Break",
-   "label": "Location SB"
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "day_start_location",
@@ -113,16 +111,11 @@
    "fieldname": "day_end",
    "fieldtype": "Time",
    "label": "Day End"
-  },
-  {
-   "fieldname": "user_route",
-   "fieldtype": "Geolocation",
-   "label": "User route"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-07-18 13:17:30.015680",
+ "modified": "2022-07-27 16:23:49.342368",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Tracking",

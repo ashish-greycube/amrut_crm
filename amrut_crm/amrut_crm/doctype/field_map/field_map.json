@@ -11,14 +11,14 @@
   "column_break_3",
   "plot_map",
   "section_break_3",
-  "visit_map"
+  "visit_map_html"
  ],
  "fields": [
   {
    "fieldname": "sales_person",
    "fieldtype": "Link",
    "label": "Sales Person",
-   "options": "Sales Person"
+   "options": "User"
   },
   {
    "fieldname": "section_break_3",
@@ -31,24 +31,25 @@
    "label": "Visit Date"
   },
   {
-   "fieldname": "visit_map",
-   "fieldtype": "Geolocation"
-  },
-  {
    "fieldname": "column_break_3",
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval: (doc.sales_person  && doc.visit_date)",
    "fieldname": "plot_map",
    "fieldtype": "Button",
    "label": "Plot Map"
+  },
+  {
+   "fieldname": "visit_map_html",
+   "fieldtype": "HTML"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2022-07-16 14:31:12.412953",
+ "modified": "2022-07-27 15:49:08.823804",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Field Map",

@@ -30,7 +30,7 @@
   "meeting_conclusion",
   "attach_file",
   "section_break_12",
-  "meeting_geo_location"
+  "visit_map_html"
  ],
  "fields": [
   {
@@ -160,11 +160,6 @@
    "label": "Attach File"
   },
   {
-   "fieldname": "meeting_geo_location",
-   "fieldtype": "Geolocation",
-   "label": "Meeting Geo Location"
-  },
-  {
    "fieldname": "field_section_detail",
    "fieldtype": "Section Break"
   },
@@ -190,11 +185,16 @@
    "label": "Meeting Executive Owner",
    "options": "User",
    "reqd": 1
+  },
+  {
+   "fieldname": "visit_map_html",
+   "fieldtype": "HTML",
+   "label": "Meeting Map"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-07-21 12:47:42.611342",
+ "modified": "2022-07-27 11:35:25.545682",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Meeting",

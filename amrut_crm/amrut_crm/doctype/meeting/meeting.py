@@ -4,10 +4,11 @@
 import frappe
 import frappe
 from frappe import _
+import json
 from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
 import datetime
-from frappe.utils import time_diff_in_seconds,get_link_to_form,get_datetime,getdate
+from frappe.utils import time_diff_in_seconds,get_link_to_form,get_datetime,getdate,get_datetime_str,cstr
 
 class Meeting(Document):
 	def validate(self):
@@ -162,3 +163,14 @@ def get_meeting_list(**args):
 	# if not (args.get("scheduled_date"):
 	# 	return 0	
 	# args["scheduled_date"] = args.get("scheduled_date")
+
+
+
+@frappe.whitelist()
+def plot_meeting_map(meeting_name):
+	meeting=frappe.get_doc('Meeting',meeting_name)
+	data={
+		"meeting_location": cstr(meeting.meeting_location),
+		"meeting_details": "\n".join([meeting.person_name,frappe.utils.get_datetime(meeting.meeting_start_date_time).strftime("%d-%B-%Y %H:%M"),meeting.meeting_purpose])
+	}
+	return data
