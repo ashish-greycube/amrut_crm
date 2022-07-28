@@ -43,16 +43,17 @@ class Tracking(Document):
 			self.work_duration=timedelta
 			out_time = get_datetime(self.tracking_date) + self.day_end
 			# create employee checkout
-			checkout_exist=frappe.db.exists('Employee Checkin', {"employee": employee.name,"log_type":"OUT","time":out_time})
-			print('checkout_exist',checkout_exist)
-			if checkout_exist==None:
-				doc = frappe.new_doc('Employee Checkin')
-				doc.employee=employee.name
-				doc.employee_name=employee.employee_name
-				doc.log_type='OUT'
-				doc.time=out_time
-				doc.save(ignore_permissions=True)
-				print(doc.name)			
+			if employee.name:
+				checkout_exist=frappe.db.exists('Employee Checkin', {"employee": employee.name,"log_type":"OUT","time":out_time})
+				print('checkout_exist',checkout_exist)
+				if checkout_exist==None:
+					doc = frappe.new_doc('Employee Checkin')
+					doc.employee=employee.name
+					doc.employee_name=employee.employee_name
+					doc.log_type='OUT'
+					doc.time=out_time
+					doc.save(ignore_permissions=True)
+					print(doc.name)			
 
 @frappe.whitelist()
 def get_logged_in_user_detail(**args):
@@ -75,7 +76,8 @@ def auto_checkout_for_missing_data():
 	data = frappe.db.sql(
 		"""
 		UPDATE `tabTracking` 
-		set day_end="23:59:00",day_end_location=day_start_location , distance_travelled_in_km =0,work_duration=0
+		set day_end="23:59:00",day_end_location=day_start_location , distance_travelled_in_km =0,work_duration=0,
+		tracked_locations = concat('[', REPLACE(day_start_location,'}',''), ' , "time":"23:59:00" }]')
 		where tracking_date= %(today)s and day_end is NULL  
 				""",
 			{"today": nowdate()},as_dict=True)

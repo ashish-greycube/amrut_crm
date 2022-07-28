@@ -27,7 +27,7 @@ frappe.ui.form.on('Meeting', {
 						console.log(String(data.meeting_location))
 						let meeting_location = JSON.parse(String(data.meeting_location))
 						console.log(meeting_location)
-						frm.get_field('visit_map_html').$wrapper.html(`<div id = "sales-map" style = "width: 1300px; height: 580px"></div>`)
+						frm.get_field('visit_map_html').$wrapper.html(`<div id = "sales-map" style="min-height: 500px; z-index: 1; max-width:100%"></div>`)
 						frm.refresh_field('visit_map_html')
 						let latlong = [meeting_location.lat, meeting_location.lng]
 						var mapOptions = {
@@ -51,7 +51,7 @@ frappe.ui.form.on('Meeting', {
 			})
 
 		}else{
-			frm.get_field('visit_map_html').$wrapper.html(`<div id = "sales-map" style = "width: 1300px; height: 580px"></div>`)
+			frm.get_field('visit_map_html').$wrapper.html(`<div id = "sales-map" style="min-height: 500px; z-index: 1; max-width:100%"></div>`)
 			frm.refresh_field('visit_map_html')
 		}
 
