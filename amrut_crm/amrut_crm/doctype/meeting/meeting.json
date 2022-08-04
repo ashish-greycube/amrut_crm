@@ -9,7 +9,7 @@
  "field_order": [
   "naming_series",
   "source",
-  "doc_name",
+  "source_doc_name",
   "person_name",
   "mobile_no",
   "sales_executive",
@@ -48,15 +48,6 @@
    "in_standard_filter": 1,
    "label": "Source",
    "options": "DocType",
-   "reqd": 1
-  },
-  {
-   "fieldname": "doc_name",
-   "fieldtype": "Dynamic Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Doc Name",
-   "options": "source",
    "reqd": 1
   },
   {
@@ -188,11 +179,20 @@
    "fieldname": "visit_map_html",
    "fieldtype": "HTML",
    "label": "Meeting Map"
+  },
+  {
+   "fieldname": "source_doc_name",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Doc Name",
+   "options": "source",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-08-04 09:17:18.667876",
+ "modified": "2022-08-04 09:41:24.391086",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Meeting",
