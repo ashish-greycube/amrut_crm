@@ -14,21 +14,21 @@ class Meeting(Document):
 	def validate(self):
 
 		if self.source=='Customer':
-			self.person_name=frappe.db.get_value('Customer', self.doc_name, 'customer_name')
-			# self.sales_executive=frappe.db.get_value('Customer', self.doc_name, 'sales_person')
-			self.sales_executive=frappe.db.get_value('Customer', self.doc_name, 'sales_responsible_cf')
-			self.territory=frappe.db.get_value('Customer', self.doc_name, 'territory')
-			self.mobile_no=frappe.db.get_value('Customer', self.doc_name, 'mobile_no')
+			self.person_name=frappe.db.get_value('Customer', self.source_doc_name, 'customer_name')
+			# self.sales_executive=frappe.db.get_value('Customer', self.source_doc_name, 'sales_person')
+			self.sales_executive=frappe.db.get_value('Customer', self.source_doc_name, 'sales_responsible_cf')
+			self.territory=frappe.db.get_value('Customer', self.source_doc_name, 'territory')
+			self.mobile_no=frappe.db.get_value('Customer', self.source_doc_name, 'mobile_no')
 		elif self.source=='Lead':
-			self.person_name=frappe.db.get_value('Lead', self.doc_name, 'lead_name')
-			self.sales_executive=frappe.db.get_value('Lead', self.doc_name, 'lead_owner')
-			self.territory=frappe.db.get_value('Lead', self.doc_name, 'territory')
-			self.mobile_no=frappe.db.get_value('Lead', self.doc_name, 'mobile_no')
+			self.person_name=frappe.db.get_value('Lead', self.source_doc_name, 'lead_name')
+			self.sales_executive=frappe.db.get_value('Lead', self.source_doc_name, 'lead_owner')
+			self.territory=frappe.db.get_value('Lead', self.source_doc_name, 'territory')
+			self.mobile_no=frappe.db.get_value('Lead', self.source_doc_name, 'mobile_no')
 		elif self.source=='Opportunity':
-			self.person_name=frappe.db.get_value('Opportunity', self.doc_name, 'customer_name')
-			self.sales_executive=frappe.db.get_value('Opportunity', self.doc_name, 'converted_by')
-			self.territory=frappe.db.get_value('Opportunity', self.doc_name, 'territory')
-			self.mobile_no=frappe.db.get_value('Opportunity', self.doc_name, 'contact_mobile')
+			self.person_name=frappe.db.get_value('Opportunity', self.source_doc_name, 'customer_name')
+			self.sales_executive=frappe.db.get_value('Opportunity', self.source_doc_name, 'converted_by')
+			self.territory=frappe.db.get_value('Opportunity', self.source_doc_name, 'territory')
+			self.mobile_no=frappe.db.get_value('Opportunity', self.source_doc_name, 'contact_mobile')
 
 		if isinstance(self.scheduled_datetime, str):
 			self.scheduled_datetime = get_datetime(self.scheduled_datetime)
@@ -79,7 +79,7 @@ def create_meeting_from_customer(source_name, target_doc=None):
 
 	meeting = frappe.new_doc("Meeting")
 	meeting.source='Customer'
-	meeting.doc_name=customer.name
+	meeting.source_doc_name=customer.name
 	meeting.person_name=customer.customer_name
 	meeting.sales_executive=customer.sales_responsible_cf
 	# meeting.sales_executive=customer.sales_person
@@ -94,7 +94,7 @@ def create_meeting_from_lead(source_name, target_doc=None):
 
 	meeting = frappe.new_doc("Meeting")
 	meeting.source='Lead'
-	meeting.doc_name=lead.name
+	meeting.source_doc_name=lead.name
 	meeting.person_name=lead.lead_name
 	meeting.sales_executive=lead.lead_owner
 	meeting.territory=lead.territory
@@ -108,7 +108,7 @@ def create_meeting_from_opportunity(source_name, target_doc=None):
 
 	meeting = frappe.new_doc("Meeting")
 	meeting.source='Opportunity'
-	meeting.doc_name=opportunity.name
+	meeting.source_doc_name=opportunity.name
 	meeting.person_name=opportunity.customer_name
 	meeting.sales_executive=opportunity.converted_by
 	meeting.territory=opportunity.territory
