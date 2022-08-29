@@ -7,7 +7,7 @@ import datetime
 from frappe import _
 from frappe.utils import time_diff_in_seconds,get_link_to_form,get_time,get_datetime,get_timedelta,getdate
 from frappe.utils import  nowdate
-import json
+# import json
 
 class Tracking(Document):
 	def after_insert(self):
@@ -56,10 +56,10 @@ class Tracking(Document):
 					doc.save(ignore_permissions=True)
 					print(doc.name)			
 		
-		if isinstance(self.get('tracked_locations'),list):
-			self.tracked_locations = json.dumps(self.tracked_locations)
-		if isinstance(self.get('day_end_location'),dict):
-			self.day_end_location = json.dumps(self.day_end_location)						
+		# if isinstance(self.get('tracked_locations'),list):
+		# 	self.tracked_locations = json.dumps(self.tracked_locations)
+		# if isinstance(self.get('day_end_location'),dict):
+		# 	self.day_end_location = json.dumps(self.day_end_location)						
 
 @frappe.whitelist()
 def get_logged_in_user_detail(**args):

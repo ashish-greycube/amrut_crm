@@ -13,6 +13,7 @@ frappe.ui.form.on('Field Map', {
 			callback: function (r) {
 				console.log(r, 'r')
 				if (r && r.message) {
+
 					// https://www.tutorialspoint.com/leafletjs/leafletjs_getting_started.htm
 					let is_tracking = true
 					let is_meeting = true
@@ -36,8 +37,18 @@ frappe.ui.form.on('Field Map', {
 					if (is_tracking == true) {
 						let tracking_data = r.message[0][0]
 						let day_start_location = JSON.parse(String(tracking_data.day_start_location))
-						// let	tracked_locations = JSON.parse(tracking_data.tracked_locations.substr(1).slice(0,-1).replaceAll("\\",""))
-						let	tracked_locations = JSON.parse(String(tracking_data.tracked_locations))
+						let tracked_locations=String(tracking_data.tracked_locations)
+						if (tracked_locations.startsWith('"[{\\'))
+						{
+							tracked_locations = JSON.parse(tracking_data.tracked_locations.substr(1).slice(0,-1).replaceAll("\\",""))
+
+						}else{
+							tracked_locations = JSON.parse(String(tracking_data.tracked_locations))
+
+						}
+						// 
+						console.log('tracked_locations',tracked_locations)
+						
 						if (day_start_location==null ) {
 							is_tracking = false
 							frappe.msgprint(__('Tracking data has missing day start '));
