@@ -36,6 +36,7 @@ frappe.ui.form.on('Field Map', {
 					if (is_tracking == true) {
 						let tracking_data = r.message[0][0]
 						let day_start_location = JSON.parse(String(tracking_data.day_start_location))
+						// let	tracked_locations = JSON.parse(tracking_data.tracked_locations.substr(1).slice(0,-1).replaceAll("\\",""))
 						let	tracked_locations = JSON.parse(String(tracking_data.tracked_locations))
 						if (day_start_location==null ) {
 							is_tracking = false
