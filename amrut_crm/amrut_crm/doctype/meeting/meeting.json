@@ -114,6 +114,7 @@
    "in_standard_filter": 1,
    "label": "Status",
    "options": "Scheduled\nCancelled\nCompleted",
+   "read_only_depends_on": "eval: frappe.user.has_role('Sales User') && !has_common(frappe.user_roles, [\"Administrator\", \"System Manager\",\"Sales Manager\",\"Sales Master Manager\"])",
    "reqd": 1
   },
   {
@@ -141,7 +142,8 @@
   {
    "fieldname": "reschedule_reason",
    "fieldtype": "Data",
-   "label": "Reschedule Reason"
+   "label": "Reschedule Reason",
+   "mandatory_depends_on": "eval:(doc.status=='Cancelled')"
   },
   {
    "fieldname": "attach_file",
@@ -192,7 +194,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-08-04 09:41:24.391086",
+ "modified": "2022-09-09 15:46:59.223675",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Meeting",
