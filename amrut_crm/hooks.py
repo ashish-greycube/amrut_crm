@@ -112,7 +112,7 @@ doctype_js = {
 
 scheduler_events = {
     "cron": {
-        "23 30 * * *": [
+        "30 23 * * *": [
            "amrut_crm.amrut_crm.doctype.tracking.tracking.auto_checkout_for_missing_data"
         ]
     }
