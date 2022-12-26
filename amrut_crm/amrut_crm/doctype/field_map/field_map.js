@@ -87,19 +87,38 @@ frappe.ui.form.on('Field Map', {
 						});
 						polyline.addTo(map);
 
-						//  Add route pins
-						var iconOptions = {
-							iconUrl: '/assets/amrut_crm/images/icons8-map-pin-24.png',
-							iconSize: [10, 10]
-						}
-						// Creating a custom icon
-						var customIcon = L.icon(iconOptions);
-						var routeOptions = {
-							clickable: true,
-							icon: customIcon
-						}
+
+						console.log(tracked_locations)
+						let last_tracked_location = tracked_locations.length - 1
 						tracked_locations.forEach((m, index) => {
-							routeOptions.title = '[' + (index + 1) + ']@' + m.time
+							let iconUrl
+							let iconSize
+							let title
+							if (index==0 ) {
+								iconUrl= '/assets/amrut_crm/images/icons8-day-start.png'
+								iconSize= [40, 40]
+								title='[' + (index + 1) + ' start]@' + m.time
+							}else if (index==last_tracked_location){
+								iconUrl= '/assets/amrut_crm/images/icons8-day-end.png'
+								iconSize= [40, 40]
+								title='[' + (index + 1) + ' end]@' + m.time
+							}else{
+								iconUrl= '/assets/amrut_crm/images/icons8-map-pin-24.png'
+								iconSize= [10, 10]
+								title='[' + (index + 1) + ']@' + m.time
+							}				
+							//  Add route pins
+							var iconOptions = {
+								iconUrl: iconUrl,
+								iconSize:iconSize
+							}
+							// Creating a custom icon
+							var customIcon = L.icon(iconOptions);
+							var routeOptions = {
+								clickable: true,
+								icon: customIcon
+							}										
+							routeOptions.title = title
 							var routepoint = new L.Marker([m.lat, m.lng], routeOptions);
 							let my_route_popup = routeOptions.title + "<br>" + route_popup
 							routepoint.bindPopup(my_route_popup).openPopup();
