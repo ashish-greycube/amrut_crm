@@ -54,6 +54,11 @@ frappe.ui.form.on('Field Map', {
 							frappe.msgprint(__('Tracking data has missing day start '));
 							return
 						}
+						if (tracked_locations==null ) {
+							is_tracking = false
+							frappe.msgprint(__('There are no tracked locations.'));
+							return
+						}						
 						let distance_travelled_in_km = tracking_data.distance_travelled_in_km
 						let work_duration = frappe.utils.get_formatted_duration(tracking_data.work_duration)
 						let tracking_name = tracking_data.tracking_name
