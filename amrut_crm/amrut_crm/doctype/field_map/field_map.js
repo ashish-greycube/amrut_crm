@@ -38,6 +38,13 @@ frappe.ui.form.on('Field Map', {
 						let tracking_data = r.message[0][0]
 						let day_start_location = JSON.parse(String(tracking_data.day_start_location))
 						let tracked_locations=String(tracking_data.tracked_locations)
+
+						if (tracked_locations==null || tracked_locations=='' ) {
+							is_tracking = false
+							frappe.msgprint(__('There are no tracked locations.'));
+							return
+						}	
+												
 						if (tracked_locations.startsWith('"[{\\'))
 						{
 							tracked_locations = JSON.parse(tracking_data.tracked_locations.substr(1).slice(0,-1).replaceAll("\\",""))
@@ -54,11 +61,7 @@ frappe.ui.form.on('Field Map', {
 							frappe.msgprint(__('Tracking data has missing day start '));
 							return
 						}
-						if (tracked_locations==null || tracked_locations=='' ) {
-							is_tracking = false
-							frappe.msgprint(__('There are no tracked locations.'));
-							return
-						}						
+					
 						let distance_travelled_in_km = tracking_data.distance_travelled_in_km
 						let work_duration = frappe.utils.get_formatted_duration(tracking_data.work_duration)
 						let tracking_name = tracking_data.tracking_name
