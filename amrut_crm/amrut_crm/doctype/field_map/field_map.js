@@ -54,7 +54,7 @@ frappe.ui.form.on('Field Map', {
 							frappe.msgprint(__('Tracking data has missing day start '));
 							return
 						}
-						if (tracked_locations==null ) {
+						if (tracked_locations==null || tracked_locations=='' ) {
 							is_tracking = false
 							frappe.msgprint(__('There are no tracked locations.'));
 							return
