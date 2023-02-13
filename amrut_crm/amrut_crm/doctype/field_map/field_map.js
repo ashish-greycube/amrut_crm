@@ -3,10 +3,10 @@
 
 frappe.ui.form.on('Field Map', {
 	onload_post_render: function (frm) {
-		$('div[data-fieldname="geo_hidden"]').hide()
+		// $('div[data-fieldname="geo_hidden"]').hide()
 	},
 	refresh: function (frm) {
-		$('div[data-fieldname="geo_hidden"]').hide()
+		// $('div[data-fieldname="geo_hidden"]').hide()
 		$('button[data-label="Save"]').hide()	
 	},
 	plot_map: function (frm) {
