@@ -11,8 +11,7 @@
   "column_break_3",
   "plot_map",
   "section_break_3",
-  "visit_map_html",
-  "geo_hidden"
+  "visit_map_html"
  ],
  "fields": [
   {
@@ -44,21 +43,13 @@
   {
    "fieldname": "visit_map_html",
    "fieldtype": "HTML"
-  },
-  {
-   "fieldname": "geo_hidden",
-   "fieldtype": "Geolocation",
-   "hidden": 1,
-   "print_hide": 1,
-   "read_only": 1,
-   "report_hide": 1
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-02-11 09:54:03.058429",
+ "modified": "2023-02-13 20:17:01.541222",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Field Map",
