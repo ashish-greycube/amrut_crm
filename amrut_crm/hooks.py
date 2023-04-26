@@ -110,13 +110,13 @@ doctype_js = {
 # Scheduled Tasks
 # ---------------
 
-scheduler_events = {
-    "cron": {
-        "30 23 * * *": [
-           "amrut_crm.amrut_crm.doctype.tracking.tracking.auto_checkout_for_missing_data"
-        ]
-    }
-}
+# scheduler_events = {
+#     "cron": {
+#         "30 23 * * *": [
+#            "amrut_crm.amrut_crm.doctype.tracking.tracking.auto_checkout_for_missing_data"
+#         ]
+#     }
+# }
 
 # Testing
 # -------
