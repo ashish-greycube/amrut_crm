@@ -76,16 +76,20 @@ class Meeting(Document):
 		if self.status and self.status == "Completed":
 			document = frappe.get_doc(self.source, self.source_doc_name)
 			if document:
-				message = "Sales Person scheduled a meeting at {0} with the agenda as {1} and after a {2} meetings, the conclusion was {3}".format(
+				message = "Sales Person scheduled a meeting at {0} with the agenda as {1} and after the {2} meeting starting at {3}, the conclusion was <b>{4}<b>".format(
 					self.scheduled_datetime if self.scheduled_datetime else '',
 					self.meeting_purpose if self.meeting_purpose else '',
 					frappe.utils.format_duration(self.meeting_duration) if self.meeting_duration else '0s',
+					self.meeting_start_date_time if self.meeting_start_date_time else '',
 					self.meeting_conclusion if self.meeting_conclusion else ''
 				)
-				document.add_comment(
-					"Info", message
-				)
-				document.save(ignore_permissions = True)
+
+				comment = frappe.new_doc("Comment")
+				comment.comment_type = "Info"
+				comment.reference_doctype = self.source
+				comment.reference_name = self.source_doc_name
+				comment.content = message
+				comment.save(ignore_permissions=True)
 
 
 
