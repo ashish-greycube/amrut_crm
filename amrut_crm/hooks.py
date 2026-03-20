@@ -95,6 +95,9 @@ doctype_js = {
 # 	"ToDo": "custom_app.overrides.CustomToDo"
 # }
 
+# After Migrate Event
+after_migrate = "amrut_crm.migration.create_connections"
+
 # Document Events
 # ---------------
 # Hook on document methods and events

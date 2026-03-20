@@ -67,9 +67,25 @@ class Meeting(Document):
 					msg=_(err_msg))		
 			timedelta = time_diff_in_seconds(self.meeting_end_date_time,self.meeting_start_date_time)
 			self.meeting_duration=timedelta
+
+		if self.status == "Completed":
+			self.add_meeting_message_in_source_activity_log()
 		
 	
-
+	def add_meeting_message_in_source_activity_log(self):
+		if self.status and self.status == "Completed":
+			document = frappe.get_doc(self.source, self.source_doc_name)
+			if document:
+				message = "Sales Person scheduled a meeting at {0} with the agenda as {1} and after a {2} meetings, the conclusion was {3}".format(
+					self.scheduled_datetime if self.scheduled_datetime else '',
+					self.meeting_purpose if self.meeting_purpose else '',
+					frappe.utils.format_duration(self.meeting_duration) if self.meeting_duration else '0s',
+					self.meeting_conclusion if self.meeting_conclusion else ''
+				)
+				document.add_comment(
+					"Info", message
+				)
+				document.save(ignore_permissions = True)
 
 
 
