@@ -32,7 +32,12 @@ class Meeting(Document):
 
 		if isinstance(self.scheduled_datetime, str):
 			self.scheduled_datetime = get_datetime(self.scheduled_datetime)
-		duplicate_meeting = frappe.db.get_value("Meeting", {"scheduled_datetime": self.scheduled_datetime,"meeting_executive_owner":self.meeting_executive_owner}, ["name"], as_dict=True)
+		from datetime import timedelta
+
+		start = self.scheduled_datetime.replace(second=0, microsecond=0)
+		end = start + timedelta(minutes=1)
+		duplicate_meeting = frappe.db.get_value("Meeting", {"scheduled_datetime": ["between", [start, end]],"meeting_executive_owner":self.meeting_executive_owner}, ["name"], as_dict=True)
+		print(duplicate_meeting)
 		if duplicate_meeting and self.name!=duplicate_meeting.name:
 			err_msg = _("Date and Time:{0}, meeting executive {1} has meeting {2} ".
 			format(frappe.bold(self.scheduled_datetime),frappe.bold(self.meeting_executive_owner),get_link_to_form('Meeting',duplicate_meeting.name)))
