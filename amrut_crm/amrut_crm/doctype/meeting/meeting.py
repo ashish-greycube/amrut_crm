@@ -11,6 +11,14 @@ import datetime
 from frappe.utils import time_diff_in_seconds,get_link_to_form,get_datetime,getdate,get_datetime_str,cstr
 
 class Meeting(Document):
+	def onload(self):
+		# For setting Default Meeting Outcome
+		if frappe.db.exists("Meeting Outcome", {"default": 1}):
+			default_outcome = frappe.get_doc("Meeting Outcome", {"default": 1})
+
+			if default_outcome and self.meeting_outcome == "":
+				self.meeting_outcome = default_outcome.name
+
 	def validate(self):
 
 		if self.source=='Customer':

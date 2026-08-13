@@ -14,10 +14,12 @@
   "mobile_no",
   "sales_executive",
   "territory",
+  "remainder_sent",
   "column_break_7",
   "meeting_executive_owner",
   "scheduled_datetime",
   "meeting_purpose",
+  "meeting_outcome",
   "status",
   "to_discuss",
   "reschedule_reason",
@@ -190,11 +192,25 @@
    "label": "Doc Name",
    "options": "source",
    "reqd": 1
+  },
+  {
+   "fieldname": "meeting_outcome",
+   "fieldtype": "Link",
+   "label": "Meeting Outcome",
+   "options": "Meeting Outcome"
+  },
+  {
+   "default": "0",
+   "fieldname": "remainder_sent",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Remainder sent"
   }
  ],
+ "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-26 09:27:17.282217",
+ "modified": "2026-08-12 10:51:35.934278",
  "modified_by": "Administrator",
  "module": "Amrut CRM",
  "name": "Meeting",
@@ -249,7 +265,9 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

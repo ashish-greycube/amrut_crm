@@ -13,6 +13,17 @@ frappe.ui.form.on('Meeting', {
 	},
 	refresh: function (frm) {
 		debugger
+
+		// For setting Default Meeting Outcome
+		frappe.db.get_value("Meeting Outcome", { "default": 1 }, "name")
+			.then((r) => {
+				let default_outcome = r.message?.name
+				if (default_outcome && default_outcome != "" && default_outcome != undefined) {
+					frm.set_value("meeting_outcome", default_outcome)
+					frm.refresh_field("meeting_outcome")
+				}
+			})
+
 		if (frm.doc.__islocal == undefined && frm.doc.meeting_location != undefined) {
 
 			frappe.call({
@@ -50,7 +61,7 @@ frappe.ui.form.on('Meeting', {
 				}
 			})
 
-		}else{
+		} else {
 			frm.get_field('visit_map_html').$wrapper.html(`<div id = "sales-map" style="min-height: 500px; z-index: 1; max-width:100%"></div>`)
 			frm.refresh_field('visit_map_html')
 		}
