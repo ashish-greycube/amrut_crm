@@ -1,7 +1,6 @@
 # Copyright (c) 2022, GreyCube Technologies and contributors
 # For license information, please see license.txt
 
-from distutils.log import debug
 import frappe
 from frappe.model.document import Document
 from frappe.utils import add_days
@@ -29,7 +28,8 @@ class FieldMap(Document):
 				meeting_start_date_time < %s 
 		""",
 			(sales_person,visit_date,add_days(visit_date,1)),
-			as_dict=True,debug=0
+			as_dict=True,
+			debug=0
 		)
 		
 
